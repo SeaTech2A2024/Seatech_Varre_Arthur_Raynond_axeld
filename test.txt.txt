@@ -1,0 +1,2 @@
+outez un fichier texte dénommé test.txt au répertoire du projet, avec ce que vous souhaitez à l’intérieur.
+Une cela effectué, regarde

@@ -4,7 +4,8 @@
 #include "ChipConfig.h"
 #include  "IO.h"
 #include "timer.h"
-
+#include "Robot.h"
+#include "PWM.h"
 int main (void){
 /***************************************************************************************************/
 //Initialisation de l?oscillateur
@@ -14,6 +15,9 @@ InitOscillator();
 InitTimer23();
 //initialisation du timer1
 InitTimer1();
+// initialisation des moteur
+InitPWM();
+PWMSetSpeed(-20,0);
 /****************************************************************************************************/
 // Configuration des entrées sorties
 /****************************************************************************************************/

@@ -26,7 +26,7 @@ IOCON6bits.PMOD = 0b01; //Set PWM Mode to Redundant
 FCLCON6 = 0x0003; //Désactive la gestion des faults
 
 /* Enable PWM Module */
-PTCONbits.PTEN = 5;
+PTCONbits.PTEN = 1;
 }
 
 void PWMSetSpeed(float vitesseEnPourcents, int moteur)
@@ -68,7 +68,7 @@ void PWMSetSpeedConsigne(float vitesseEnPourcents, int moteur){
     if (moteur==0){
         robotState.vitesseDroiteConsigne = vitesseEnPourcents;
     }
-     if (moteur==1){
+    if (moteur==1){
         robotState.vitesseGaucheConsigne = vitesseEnPourcents;
     }
 }

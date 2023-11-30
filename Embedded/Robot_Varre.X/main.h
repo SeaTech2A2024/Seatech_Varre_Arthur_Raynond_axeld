@@ -23,6 +23,11 @@
 #define OBSTACLE_A_GAUCHE 1
 #define OBSTACLE_A_DROITE 2
 #define OBSTACLE_EN_FACE 3
+#define OBSTACLE_A_EXGAUCHE 4
+#define OBSTACLE_A_EXDROITE 5
+#define TUNNEL 6
+#define ANGLEGAUCHE 7 
+#define ANGLEDROIT 8
 void OperatingSystemLoop();
 void SetNextRobotStateInAutomaticMode();
 #endif 

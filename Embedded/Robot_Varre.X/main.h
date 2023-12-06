@@ -28,6 +28,9 @@
 #define TUNNEL 6
 #define ANGLEGAUCHE 7 
 #define ANGLEDROIT 8
+#define OBSTACLE_LEG_DROIT 9
+#define OBSTACLE_LEG_GAUCHE 10
+#define OBSTACLE 11 
 void OperatingSystemLoop();
 void SetNextRobotStateInAutomaticMode();
 #endif 

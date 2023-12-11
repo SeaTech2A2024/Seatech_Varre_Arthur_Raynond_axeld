@@ -133,10 +133,10 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x9e4           0xed6  (3798)
-.text                        0xbe4               0xcae          0x1305  (4869)
-.dinit                      0x1892                0x2e            0x45  (69)
+.text                        0xbe4               0xcac          0x1302  (4866)
+.dinit                      0x1890                0x2e            0x45  (69)
 
-                 Total "program" memory used (bytes):         0x2220  (8736) 1%
+                 Total "program" memory used (bytes):         0x221d  (8733) 1%
 
 
 "data" Memory  [Origin = 0x1000, Length = 0xc000]
@@ -238,56 +238,56 @@ External Symbols in Program Memory (by address):
                   0x000bd4                  __funpack2
                   0x000be4                  _OperatingSystemLoop
                   0x000cc2                  _SetNextRobotStateInAutomaticMode
-                  0x000ffe                  _main
-                  0x001180                  _InitPWM
-                  0x0011b8                  _PWMSetSpeed
-                  0x001298                  _PWMSetSpeedConsigne
-                  0x0012c4                  _PWMUpdateSpeed
-                  0x00141a                  _InitTimer23
-                  0x00144c                  _SetFreqTimer1
-                  0x001534                  _SetFreqTimer4
-                  0x00161c                  _InitTimer1
-                  0x001632                  _InitTimer4
-                  0x001648                  _Abs
-                  0x001674                  _Max
-                  0x0016a8                  _Min
-                  0x0016dc                  _LimitToInterval
-                  0x001732                  _RadianToDegree
-                  0x00174a                  _DegreeToRadian
-                  0x001762                  _InitADC1
-                  0x0017d6                  _ADC1StartConversionSequence
-                  0x0017de                  _ADCGetResult
-                  0x0017e6                  _ADCIsConversionFinished
-                  0x0017ee                  _ADCClearConversionFinishedFlag
-                  0x0017f6                  _InitOscillator
-                  0x00184c                  _InitIO
+                  0x000ffc                  _main
+                  0x00117e                  _InitPWM
+                  0x0011b6                  _PWMSetSpeed
+                  0x001296                  _PWMSetSpeedConsigne
+                  0x0012c2                  _PWMUpdateSpeed
+                  0x001418                  _InitTimer23
+                  0x00144a                  _SetFreqTimer1
+                  0x001532                  _SetFreqTimer4
+                  0x00161a                  _InitTimer1
+                  0x001630                  _InitTimer4
+                  0x001646                  _Abs
+                  0x001672                  _Max
+                  0x0016a6                  _Min
+                  0x0016da                  _LimitToInterval
+                  0x001730                  _RadianToDegree
+                  0x001748                  _DegreeToRadian
+                  0x001760                  _InitADC1
+                  0x0017d4                  _ADC1StartConversionSequence
+                  0x0017dc                  _ADCGetResult
+                  0x0017e4                  _ADCIsConversionFinished
+                  0x0017ec                  _ADCClearConversionFinishedFlag
+                  0x0017f4                  _InitOscillator
+                  0x00184a                  _InitIO
                   0x0557fa                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0017d6                  _ADC1StartConversionSequence
-                  0x0017ee                  _ADCClearConversionFinishedFlag
-                  0x0017de                  _ADCGetResult
-                  0x0017e6                  _ADCIsConversionFinished
-                  0x001648                  _Abs
-                  0x00174a                  _DegreeToRadian
-                  0x001762                  _InitADC1
-                  0x00184c                  _InitIO
-                  0x0017f6                  _InitOscillator
-                  0x001180                  _InitPWM
-                  0x00161c                  _InitTimer1
-                  0x00141a                  _InitTimer23
-                  0x001632                  _InitTimer4
-                  0x0016dc                  _LimitToInterval
-                  0x001674                  _Max
-                  0x0016a8                  _Min
+                  0x0017d4                  _ADC1StartConversionSequence
+                  0x0017ec                  _ADCClearConversionFinishedFlag
+                  0x0017dc                  _ADCGetResult
+                  0x0017e4                  _ADCIsConversionFinished
+                  0x001646                  _Abs
+                  0x001748                  _DegreeToRadian
+                  0x001760                  _InitADC1
+                  0x00184a                  _InitIO
+                  0x0017f4                  _InitOscillator
+                  0x00117e                  _InitPWM
+                  0x00161a                  _InitTimer1
+                  0x001418                  _InitTimer23
+                  0x001630                  _InitTimer4
+                  0x0016da                  _LimitToInterval
+                  0x001672                  _Max
+                  0x0016a6                  _Min
                   0x000be4                  _OperatingSystemLoop
-                  0x0011b8                  _PWMSetSpeed
-                  0x001298                  _PWMSetSpeedConsigne
-                  0x0012c4                  _PWMUpdateSpeed
-                  0x001732                  _RadianToDegree
-                  0x00144c                  _SetFreqTimer1
-                  0x001534                  _SetFreqTimer4
+                  0x0011b6                  _PWMSetSpeed
+                  0x001296                  _PWMSetSpeedConsigne
+                  0x0012c2                  _PWMUpdateSpeed
+                  0x001730                  _RadianToDegree
+                  0x00144a                  _SetFreqTimer1
+                  0x001532                  _SetFreqTimer4
                   0x000cc2                  _SetNextRobotStateInAutomaticMode
                   0x00034c                  __AD1Interrupt
                   0x000370                  __DefaultInterrupt
@@ -329,7 +329,7 @@ External Symbols in Program Memory (by name):
                   0x000982                  __typef
                   0x000924                  __unpackdnrmf
                   0x000a6e                  __unpackf
-                  0x000ffe                  _main
+                  0x000ffc                  _main
 
 Memory Configuration
 
@@ -493,7 +493,7 @@ __FOSCSEL
 
 __FGS             0x0557fa          0x2
  *(__FGS.sec*)
- __FGS.sec        0x0557fa          0x2 /CW/_FGS@Çb
+ __FGS.sec        0x0557fa          0x2 /CW/_FGSÀ±`
                   0x0557fa                  __FGS.sec
 
 __FUID0
@@ -2547,7 +2547,7 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-elf.a
 END GROUP
 OUTPUT(dist/default/production/Robot_Varre.X.production.elf elf32-pic30)
-LOAD /CW/_FGS@Çb
+LOAD /CW/_FGSÀ±`
 LOAD default_isr
 LOAD data_init
 
@@ -2684,39 +2684,39 @@ __c30_signature
  .ivt._AD1Interrupt
                   0x00002e          0x2 build/default/production/ADC.o
 
-.text             0x000be4        0xcae
- .text            0x000be4        0x59c build/default/production/main.o
+.text             0x000be4        0xcac
+ .text            0x000be4        0x59a build/default/production/main.o
                   0x000be4                  _OperatingSystemLoop
                   0x000cc2                  _SetNextRobotStateInAutomaticMode
-                  0x000ffe                  _main
- .text            0x001180        0x29a build/default/production/PWM.o
-                  0x001180                  _InitPWM
-                  0x0011b8                  _PWMSetSpeed
-                  0x001298                  _PWMSetSpeedConsigne
-                  0x0012c4                  _PWMUpdateSpeed
- .text            0x00141a        0x22e build/default/production/timer.o
-                  0x00141a                  _InitTimer23
-                  0x00144c                  _SetFreqTimer1
-                  0x001534                  _SetFreqTimer4
-                  0x00161c                  _InitTimer1
-                  0x001632                  _InitTimer4
- .text            0x001648        0x11a build/default/production/Toolbox.o
-                  0x001648                  _Abs
-                  0x001674                  _Max
-                  0x0016a8                  _Min
-                  0x0016dc                  _LimitToInterval
-                  0x001732                  _RadianToDegree
-                  0x00174a                  _DegreeToRadian
- .text            0x001762         0x94 build/default/production/ADC.o
-                  0x001762                  _InitADC1
-                  0x0017d6                  _ADC1StartConversionSequence
-                  0x0017de                  _ADCGetResult
-                  0x0017e6                  _ADCIsConversionFinished
-                  0x0017ee                  _ADCClearConversionFinishedFlag
- .text            0x0017f6         0x56 build/default/production/ChipConfig.o
-                  0x0017f6                  _InitOscillator
- .text            0x00184c         0x46 build/default/production/IO.o
-                  0x00184c                  _InitIO
+                  0x000ffc                  _main
+ .text            0x00117e        0x29a build/default/production/PWM.o
+                  0x00117e                  _InitPWM
+                  0x0011b6                  _PWMSetSpeed
+                  0x001296                  _PWMSetSpeedConsigne
+                  0x0012c2                  _PWMUpdateSpeed
+ .text            0x001418        0x22e build/default/production/timer.o
+                  0x001418                  _InitTimer23
+                  0x00144a                  _SetFreqTimer1
+                  0x001532                  _SetFreqTimer4
+                  0x00161a                  _InitTimer1
+                  0x001630                  _InitTimer4
+ .text            0x001646        0x11a build/default/production/Toolbox.o
+                  0x001646                  _Abs
+                  0x001672                  _Max
+                  0x0016a6                  _Min
+                  0x0016da                  _LimitToInterval
+                  0x001730                  _RadianToDegree
+                  0x001748                  _DegreeToRadian
+ .text            0x001760         0x94 build/default/production/ADC.o
+                  0x001760                  _InitADC1
+                  0x0017d4                  _ADC1StartConversionSequence
+                  0x0017dc                  _ADCGetResult
+                  0x0017e4                  _ADCIsConversionFinished
+                  0x0017ec                  _ADCClearConversionFinishedFlag
+ .text            0x0017f4         0x56 build/default/production/ChipConfig.o
+                  0x0017f4                  _InitOscillator
+ .text            0x00184a         0x46 build/default/production/IO.o
+                  0x00184a                  _InitIO
 
-.dinit            0x001892         0x2e
- .dinit           0x001892         0x2e data_init
+.dinit            0x001890         0x2e
+ .dinit           0x001890         0x2e data_init

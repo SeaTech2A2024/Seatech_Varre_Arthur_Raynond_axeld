@@ -1,18 +1,16 @@
-﻿using System;
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using System.Management;
 using System.Text.RegularExpressions;
-using System.Threading;
 
-namespace ExtendedSerialPort
+namespace ExtendedSerialPort_NS
 {
-    public class ReliableSerialPort : SerialPort
+    public class ExtendedSerialPort : SerialPort
     {
-        private Thread connectionThread;
+        private Thread connectionThread = new Thread(()=> { });
         private bool IsSerialPortConnected = false;
-        //private String PortName;
+        ManualResetEvent isThreadActive = new ManualResetEvent(false);
 
-        public ReliableSerialPort(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
+        public ExtendedSerialPort(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
         {
             PortName = portName;
             BaudRate = baudRate;
@@ -24,7 +22,8 @@ namespace ExtendedSerialPort
             NewLine = Environment.NewLine;
             ReceivedBytesThreshold = 1024;
             InitConnexionThread();
-            connectionThread.Start();
+            StartTryingToConnect();
+
         }
 
         private void InitConnexionThread()
@@ -35,58 +34,58 @@ namespace ExtendedSerialPort
                 //Le Thread est infini mais il sera suspendu quand le port série sera trouvé et ouvert
                 while (true)
                 {
-                    string PortNameFound = PortName;//SearchPortName(PortType); 
-                    if (!string.IsNullOrWhiteSpace(PortNameFound))
+                    if (isThreadActive.WaitOne())
                     {
-                        //Si on trouve un port série de type voulu
-                        //if(base.PortName != PortNameFound)
-                        //    base.PortName = PortNameFound;
-                        try
+                        string PortNameFound = PortName;//SearchPortName(PortType); 
+                        if (!string.IsNullOrWhiteSpace(PortNameFound))
                         {
-                            base.Open();
-                            IsSerialPortConnected = true;
-                            Console.WriteLine("Connection to serial port successful.");
-                            //On lance les acquisitions
-                            ContinuousRead();
-                            //On suspend le Thread de connexion
-                            StopTryingToConnect();
+                            //Si on trouve un port série de type voulu
+                            base.PortName = PortNameFound;
+                            try
+                            {
+                                base.Open();
+                                IsSerialPortConnected = true;
+                                Console.WriteLine("Connection to serial port successful.");
+                                //On lance les acquisitions
+                                ContinuousRead();
+                                //On suspend le Thread de connexion
+                                StopTryingToConnect();
+                            }
+                            catch
+                            {
+                                IsSerialPortConnected = false;
+                                Console.WriteLine("Connection to serial port failed.");
+                            }
                         }
-                        catch
+                        else
                         {
                             IsSerialPortConnected = false;
-                            Console.WriteLine("Connection to serial port failed.");
+                            Console.WriteLine("Serial port not found.");
                         }
+                        Thread.Sleep(2000);
                     }
-                    else
-                    {
-                        IsSerialPortConnected = false;
-                        Console.WriteLine("Serial port not found.");
-                    }
-                    Thread.Sleep(2000);
                 }
             });
             connectionThread.IsBackground = true;
+            connectionThread.Start();
         }
 
         private void StartTryingToConnect()
         {
             //Reprise du Thread de Connexion
-            connectionThread.Resume();
+            isThreadActive.Set();            
         }
-        
+
         private void StopTryingToConnect()
         {
             //Suspension du Thread de Connexion
-            connectionThread.Suspend();
+            isThreadActive.Reset();    
         }
 
         new public void Open()
         {
             //On ne fait rien, c'est volontaire !
-            base.Open();
         }
-
-
 
         private string SearchPortName(string vendorName)
         {
@@ -171,11 +170,10 @@ namespace ExtendedSerialPort
         }
 
         ////********************************************** Output events **********************************************************************************//
-        public delegate void DataReceivedEventHandler(object sender, DataReceivedArgs e);
-        public event EventHandler<DataReceivedArgs> OnDataReceivedEvent;
-        public virtual void OnDataReceived(byte[] data)
+        public event EventHandler<DataReceivedArgs> DataReceived;
+        public new virtual void OnDataReceived(byte[] data)
         {
-            var handler = OnDataReceivedEvent;
+            var handler = DataReceived;
             if (handler != null)
             {
                 handler(this, new DataReceivedArgs { Data = data });

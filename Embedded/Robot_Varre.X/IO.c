@@ -17,6 +17,8 @@ void InitIO()
     ANSELF = 0;
     ANSELG = 0;
 
+
+
     // Configuration des sorties
 
     //******* LED ***************************
@@ -32,7 +34,9 @@ void InitIO()
     // Configuration des entrées
     
 
-    // Configuration des pins remappables    
+    // Configuration des pins remappables  
+    _U1RXR = 24; //Remappe la RP... sur l?éentre Rx1
+    _RP36R = 0b00001; //Remappe la sortie Tx1 vers RP...
     //*************************************************************
     // Unlock Registers
     //*************************************************************

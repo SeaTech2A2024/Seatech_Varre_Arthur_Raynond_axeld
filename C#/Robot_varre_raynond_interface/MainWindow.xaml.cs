@@ -1,4 +1,4 @@
-﻿using ExtendedSerialPort;
+﻿using ExtendedSerialPort_NS;
 using System.Windows.Threading;
 using System;
 using System.Collections.Generic;
@@ -23,31 +23,48 @@ namespace Robot_varre_raynond_interface
     /// </summary>
     public partial class MainWindow : Window
     {
-        ReliableSerialPort serialPort1;
+        ExtendedSerialPort serialPort1;
         DispatcherTimer timerAffichage;
-        string ReceivedText;
+        Robot robot = new Robot();
+
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM21", 115200, Parity.None, 8, StopBits.One);
-            serialPort1.OnDataReceivedEvent += SerialPort1_OnDataReceivedEvent;
-            //serialPort1.Open(); 
+            serialPort1 = new ExtendedSerialPort("COM15", 115200, Parity.None, 8, StopBits.One);
+            serialPort1.DataReceived += SerialPort1_DataReceived;
+            serialPort1.Open(); 
             timerAffichage = new DispatcherTimer();
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
         }
 
+        private void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
+        {
+            //robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            for(int i=0; i<e.Data.Length; i++)
+            {
+                robot.byteListReceived.Enqueue(e.Data[i]);
+            }
+        }
+
+
+
         private void TimerAffichage_Tick(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            while(robot.byteListReceived.Count > 0)
+            {
+                var b = robot.byteListReceived.Dequeue();
+                TextBoxReception.Text += b.ToString("X2") + " ";
+            }
+            //if (robot.receivedText != "")
+            //{
+            //    TextBoxReception.Text = robot.receivedText;
+            //    robot.receivedText = "";
+            //}
+            //throw new NotImplementedException();
         }
-
-        private void SerialPort1_OnDataReceivedEvent(object? sender, DataReceivedArgs e)
-        {
-            ReceivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
-
-        }
+        
 
         private void TextBoxEmission_KeyUp(object sender, KeyEventArgs e)
         {
@@ -59,7 +76,6 @@ namespace Robot_varre_raynond_interface
 
         private void TextBoxReception_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void Sendmessage()
@@ -81,8 +97,18 @@ namespace Robot_varre_raynond_interface
             }
             Sendmessage();
         }
-
-  
-
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxReception.Text = "";
+        }
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] byteList = new byte[20];
+            for (int i = 0; i < 20; i++)
+            {
+                byteList[i] = (byte)(2 * i);
+            }
+            serialPort1.Write(byteList, 0, byteList.Length);
+        }
     }
 }

@@ -8,6 +8,7 @@
 #include "PWM.h"
 #include "adc.h"
 #include "main.h"
+#include "UART.h"
 
 unsigned char stateRobot;
 
@@ -172,11 +173,13 @@ int ADCValue3;
 int ADCValue4;
 
 int main(void) {
+
+
     /***************************************************************************************************/
     //Initialisation de l?oscillateur
     /****************************************************************************************************/
     InitOscillator();
-
+    
     /****************************************************************************************************/
     // Configuration des entrées sorties
     /****************************************************************************************************/
@@ -192,9 +195,13 @@ int main(void) {
     InitPWM();
     // initialiser ADC
     InitADC1();
+    // initialiser l'uart
+    InitUART();
 
     /****************************************************************************************************/
     // Boucle Principale
+    SendMessageDirect((unsigned char*) "Bonjour", 7);
+    __delay32(40000000);
     /****************************************************************************************************/
     while (1) {
         if (ADCIsConversionFinished() == 1) {
@@ -230,5 +237,6 @@ int main(void) {
 
         }
     }
+
 
 } // fin main

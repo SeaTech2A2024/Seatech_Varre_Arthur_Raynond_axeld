@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot_varre_raynond_interface", "Robot_varre_raynond_interface.csproj", "{6BE324BD-84F3-40F9-A1F3-7AC508F4C91F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedSerialPort", "..\ExtendedSerialPort\ExtendedSerialPort.csproj", "{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendedSerialPort", "..\ExtendedSerialPort\ExtendedSerialPort.csproj", "{DC64BB33-9E21-4852-829A-43AAEE248804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{6BE324BD-84F3-40F9-A1F3-7AC508F4C91F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BE324BD-84F3-40F9-A1F3-7AC508F4C91F}.Release|x64.ActiveCfg = Release|Any CPU
 		{6BE324BD-84F3-40F9-A1F3-7AC508F4C91F}.Release|x64.Build.0 = Release|Any CPU
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Debug|x64.ActiveCfg = Debug|x64
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Debug|x64.Build.0 = Debug|x64
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Release|x64.ActiveCfg = Release|x64
-		{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}.Release|x64.Build.0 = Release|x64
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC64BB33-9E21-4852-829A-43AAEE248804}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

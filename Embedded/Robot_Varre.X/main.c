@@ -9,6 +9,9 @@
 #include "adc.h"
 #include "main.h"
 #include "UART.h"
+#include "CB_TX1.h"
+#include "CB_RX1.h"
+#include <libpic30.h>
 
 unsigned char stateRobot;
 
@@ -200,10 +203,20 @@ int main(void) {
 
     /****************************************************************************************************/
     // Boucle Principale
-    SendMessageDirect((unsigned char*) "Bonjour", 7);
-    __delay32(40000000);
+   //SendMessage((unsigned char*) "Bonjour", 7);
+   //__delay32(40000000);
+
     /****************************************************************************************************/
     while (1) {
+        
+        int i;
+        for(i=0; i< CB_RX1_GetDataSize(); i++)
+         {
+        unsigned char c = CB_RX1_Get();
+        SendMessage(&c,1);
+         }
+         __delay32(1000);
+    
         if (ADCIsConversionFinished() == 1) {
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();

@@ -56,8 +56,10 @@ namespace Robot_varre_raynond_interface
         {
             while (robot.byteListReceived.Count > 0)
             {
-                var b = robot.byteListReceived.Dequeue();
-                TextBoxReception.Text += b.ToString("X2") + " ";
+                byte b = robot.byteListReceived.Dequeue();
+                DecodeMessage(b);
+
+            //    TextBoxReception.Text += b.ToString("X2") + " ";
             }
             //if (robot.receivedText != "")
             //{
@@ -111,13 +113,20 @@ namespace Robot_varre_raynond_interface
             //    byteList[i] = (byte)(2 * i);
             //}
             //serialPort1.Write(byteList, 0, byteList.Length);
+                //string message = TextBoxEmission.Text;
 
-            string message = TextBoxEmission.Text;
-            byte[] array = Encoding.ASCII.GetBytes(message);
-            UartEncodeAndSendMessage(0x0080, array.Length, array);
-            TextBoxEmission.Text = null;
-        }
-        byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+                    byte[] array = Encoding.ASCII.GetBytes("Bonjour");
+                    UartEncodeAndSendMessage(0x0080, array.Length, array);
+
+                    UartEncodeAndSendMessage(0x0020, 2, new byte[] { 1,1 });
+     
+             
+                    UartEncodeAndSendMessage(0x0030, 3, new byte[] { 40, 50,40 });
+ 
+                    UartEncodeAndSendMessage(0x0040, 2, new byte[] { 40, 60 });
+                           
+            }
+            byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
             byte checksum = 0;
 
@@ -175,8 +184,8 @@ namespace Robot_varre_raynond_interface
 
 
                 case StateReception.FunctionLSB:
-                    msgDecodedFunction |= c << 0;
-                    rcvState |= StateReception.PayloadLengthMSB;
+                    msgDecodedFunction |= c;
+                    rcvState = StateReception.PayloadLengthMSB;
                     break;
 
 
@@ -188,16 +197,18 @@ namespace Robot_varre_raynond_interface
 
                 case StateReception.PayloadLengthLSB:
                     msgDecodedPayloadLength |= c << 0;
-                    rcvState |= StateReception.Payload;
+                    rcvState = StateReception.Payload;
 
                     if (msgDecodedPayloadLength == 0)
                         rcvState = StateReception.CheckSum;
                     else if (msgDecodedPayloadLength >= 256)
                         rcvState = StateReception.Waiting;
                     else
+                    {
                         rcvState = StateReception.Payload;
-                    msgDecodedPayloadIndex = 0;
-                    msgDecodedPayload = new Byte[msgDecodedPayloadLength];
+                        msgDecodedPayloadIndex = 0;
+                        msgDecodedPayload = new Byte[msgDecodedPayloadLength];
+                    }
                     break;
 
 
@@ -214,8 +225,13 @@ namespace Robot_varre_raynond_interface
                     byte calculatedChecksum = CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     if (calculatedChecksum == receivedChecksum)
                     {
-                        //Success, on a un message valide
+                        TextBoxReception.Text+="Checksum atteint";
                     }
+                    else
+                    {
+                        TextBoxReception.Text = "ERRRROR";
+                    }
+                    rcvState = StateReception.Waiting;
                     break;
                 default:
                     rcvState = StateReception.Waiting;
@@ -223,6 +239,54 @@ namespace Robot_varre_raynond_interface
             }
         }
 
+        private void LabelIRC_KeyUp(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void LabelIRD_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LabelIRG_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void CheckBoxLedBlanche_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LEDR_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LEDV_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void VitesseGauche_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void VitesseDroite_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void CheckBoxLedRouge_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void CheckBoxLedVert_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
     public enum StateReception
     {
@@ -233,6 +297,17 @@ namespace Robot_varre_raynond_interface
         Payload,
         CheckSum,
         FunctionLSB
+    }
+    public enum CommandID
+    {
+        Texte=0x0080,
+        LED=0x0020,
+        Télémètre=0x0030,
+        Consigne=0x0040
+    }
+    void ProcessDecodedMessage(int msgFunction,int msgPayloadLength, byte[] msgPayload)
+    {
+        switch (msgFunction) { }
     }
 
 }

@@ -12,7 +12,7 @@
 #include "CB_TX1.h"
 #include "CB_RX1.h"
 #include <libpic30.h>
-
+#include "UART_Protocol.h"
 unsigned char stateRobot;
 
 void OperatingSystemLoop(void) {

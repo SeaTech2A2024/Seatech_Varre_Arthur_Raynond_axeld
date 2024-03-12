@@ -32,19 +32,26 @@
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <GroupBox x:Name="TélémètresIR" Header="TélémètresIR"  Margin="5" Width="150" >
                 <StackPanel Orientation="Vertical">
-                    <Label Content="Télémètre gauche :" />
-                    <Label Name="LabelhIRG"  KeyUp="LabelIRG_KeyUp"></Label>
-                    <Label Content="Télémètre droit :" />
-                    <Label Name="LabelIRD" KeyUp="LabelIRD_KeyUp" ></Label>
-                    <Label Content="Télémètre centre :" />
-                    <Label Name="LabelIRC" KeyUp="LabelIRC_KeyUp"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Télémètre gauche :" />
+                        <Label Name="LabelIRG"  KeyUp="LabelIRG_KeyUp"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Télémètre droit :" />
+                        <Label Name="LabelIRD" KeyUp="LabelIRD_KeyUp" ></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Télémètre centre :" />
+                        <Label Name="LabelIRC" KeyUp="LabelIRC_KeyUp"></Label>
+                    </StackPanel>
+
       
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="GroupBoxLED" Header="LED" Margin="5" Width="100">
                 <StackPanel Orientation="Vertical">
                 
-                        <CheckBox Content="LED B" Name="CheckBoxLedBlanche" KeyUp="CheckBoxLedBlanche_KeyUp"></CheckBox>
+                        <CheckBox Content="LED Bleue" Name="CheckBoxLedBlanche" KeyUp="CheckBoxLedBlanche_KeyUp"></CheckBox>
     
                         <CheckBox Content="LED Rouge" Name="CheckBoxLedRouge" KeyUp="CheckBoxLedRouge_KeyUp"></CheckBox>
                 
@@ -54,13 +61,14 @@
             </GroupBox>
             <GroupBox x:Name="Moteurs" Header="Moteurs" Margin="5" Width="130">
                 <StackPanel Orientation="Vertical">
-              
+                    <StackPanel Orientation="Horizontal">
                         <Label Content="Vitesse gauche :" />
                         <Label Name="VitesseGauche" KeyUp="VitesseGauche_KeyUp" Margin="5"></Label>
-         
-                        <Label Content="Vitesse droite :" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                            <Label Content="Vitesse droite :" />
                         <Label Name="VitesseDroite" KeyUp="VitesseDroite_KeyUp" Margin="5"></Label>
-               
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

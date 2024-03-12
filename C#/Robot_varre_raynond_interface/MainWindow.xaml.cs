@@ -118,14 +118,13 @@ namespace Robot_varre_raynond_interface
                     byte[] array = Encoding.ASCII.GetBytes("Bonjour");
                     UartEncodeAndSendMessage(0x0080, array.Length, array);
 
-                    UartEncodeAndSendMessage(0x0020, 2, new byte[] { 1,1 });
-     
-             
-                    UartEncodeAndSendMessage(0x0030, 3, new byte[] { 40, 50,40 });
- 
+                    UartEncodeAndSendMessage(0x0020, 2, new byte[] { 2, 1 });
+
+                    UartEncodeAndSendMessage(0x0030, 3, new byte[] { 40, 50, 40 });
+
                     UartEncodeAndSendMessage(0x0040, 2, new byte[] { 40, 60 });
-                           
-            }
+
+        }
             byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
             byte checksum = 0;
@@ -226,6 +225,7 @@ namespace Robot_varre_raynond_interface
                     if (calculatedChecksum == receivedChecksum)
                     {
                         TextBoxReception.Text+="Checksum atteint";
+                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     }
                     else
                     {
@@ -238,9 +238,44 @@ namespace Robot_varre_raynond_interface
                     break;
             }
         }
-
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch (msgFunction) 
+            {
+                case 0x0080:
+                    TextBoxReception.Text += "\n"+ System.Text.Encoding.UTF8.GetString(msgPayload);
+                    break;
+                case 0x0020:
+                    CheckBoxLedBlanche.IsChecked = false;
+                    CheckBoxLedRouge.IsChecked = false;
+                    CheckBoxLedVert.IsChecked = false;
+                    switch (msgPayload[0]) ///switch sur le numéro de la led
+                    {
+                        case 0:
+                            CheckBoxLedBlanche.IsChecked = (msgPayload[1] != 0);
+                            break;
+                        case 1:
+                            CheckBoxLedVert.IsChecked = (msgPayload[1] != 0);
+                            break;
+                        case 2:
+                            CheckBoxLedRouge.IsChecked = (msgPayload[1] != 0);
+                            break;
+                    }
+                    break;
+                case 0x0030:
+                    LabelIRG.Content = msgPayload[0];
+                    LabelIRC.Content = msgPayload[1];
+                    LabelIRD.Content = msgPayload[2];
+                    break;
+                case 0x0040:
+                    VitesseGauche.Content = msgPayload[0];
+                    VitesseDroite.Content = msgPayload[1];
+                    break;
+            }
+        }
         private void LabelIRC_KeyUp(object sender, KeyEventArgs e)
         {
+    
         }
 
         private void LabelIRD_KeyUp(object sender, KeyEventArgs e)
@@ -254,16 +289,6 @@ namespace Robot_varre_raynond_interface
         }
 
         private void CheckBoxLedBlanche_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void LEDR_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void LEDV_KeyUp(object sender, KeyEventArgs e)
         {
 
         }
@@ -305,9 +330,6 @@ namespace Robot_varre_raynond_interface
         Télémètre=0x0030,
         Consigne=0x0040
     }
-    void ProcessDecodedMessage(int msgFunction,int msgPayloadLength, byte[] msgPayload)
-    {
-        switch (msgFunction) { }
-    }
+
 
 }
